@@ -1,0 +1,16 @@
+\section{Introduction}
+\label{chap:introduction}
+
+Modern time series analysis is characterized by an abundance of both data and possible modeling algorithms used for inference assessment and prediction.
+The latter range from traditional statistical approaches like ARIMA, GARCH or Exponential Smoothing to modern Machine Learning methods like Penalized Regression,
+Regression Trees or Deep Learning. Brief overviews over available methods as well as empirical comparisons are given in~\cite{Ahmed2010, Makridakis2018, Hyndman2020}.
+Machine Learning methods have gained popularity in recent years~\citep[p. 1]{Makridakis2018}~and appeal through their ability to map complex functional forms without
+imposing restrictions that are inherent to traditional statistical methods \citep[p. 1083]{Hill1996}, but also show their limitations in their
+Black-Box nature \citep[p. 351, 352]{Hastie2009} and mixed success in empirical comparisons \citep[p. 594]{Ahmed2010},\citep[p. 1]{Makridakis2018}.
+Neural Networks as representatives of Deep Learning have gained particular popularity, with recent econometric applications in \cite{Bucci2019, Sestanovic2021}.\\
+Aimed at providing an intuition about the forecasting accuracy of Neural Networks for nonlinear time series, as well as laying out the underlying theoretical
+groundwork, the rest of this thesis is structured as follows:\\
+Chapter~\ref{chap:linear} gives a brief intuition about linear time series models and relevant assumptions. Chapter~\ref{chap:testing} elaborates on the subject of
+nonlinearity in time series and designated test procedures. Chapter~\ref{chap:neural} gives a brief introduction to Neural Networks. Chapter~\ref{chap:empirical}
+analyses U.S. housing data with emphasis on detecting nonlinearity in the series. Chapter~\ref{chap:benchmark} compares the forecasting accuracy of ARIMA and NN models,
+chapter~\ref{chap:conclusion} sums up the results.

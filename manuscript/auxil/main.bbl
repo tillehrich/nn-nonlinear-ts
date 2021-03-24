@@ -1,0 +1,155 @@
+\begin{thebibliography}{25}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{Ahmed et~al.(2010)Ahmed, Atiya, Gayar, and El-Shishiny}]{Ahmed2010}
+Ahmed, N., A.~Atiya, N.~Gayar, and H.~El-Shishiny (2010), \enquote{An Empirical
+  Comparison of Machine Learning Models for Time Series Forecasting,}
+  \textit{Econometric Reviews}, 29, 594--621,
+  \doi{10.1080/07474938.2010.481556}.
+
+\bibitem[{Bisaglia and Gerolimetto(2014)}]{Bisaglia2014}
+Bisaglia, L., and M.~Gerolimetto (2014), \enquote{Testing for (non)linearity in
+  economic time series,} \textit{Quaderni Di Statistica}, 16, 5--32.
+
+\bibitem[{Blake and Kapetanios(2003)}]{Blake2003}
+Blake, A.~P., and G.~Kapetanios (2003), \enquote{Testing for Arch in the
+  Presence of Nonlinearity of Unknown Form in the Conditional Mean,}
+  \doi{https://dx.doi.org/10.2139/ssrn.425402}.
+
+\bibitem[{Bollerslev(1986)}]{Bollerslev1986}
+Bollerslev, T. (1986), \enquote{Generalized autoregressive conditional
+  heteroskedasticity,} \textit{Journal of Econometrics}, 31(3), 307 -- 327,
+  \doi{https://doi.org/10.1016/0304-4076(86)90063-1},
+  \urlprefix\url{http://www.sciencedirect.com/science/article/pii/0304407686900631}.
+
+\bibitem[{Brock et~al.(1996)Brock, Scheinkman, Dechert, and
+  LeBaron}]{Brock1996}
+Brock, W.~A., J.~A. Scheinkman, W.~D. Dechert, and B.~LeBaron (1996),
+  \enquote{A test for independence based on the correlation dimension,}
+  \textit{Econometric Reviews}, 15(3), 197--235,
+  \doi{10.1080/07474939608800353},
+  \urlprefix\url{https://doi.org/10.1080/07474939608800353}.
+
+\bibitem[{Bucci(2019)}]{Bucci2019}
+Bucci, A. (2019), \enquote{{Realized Volatility Forecasting with Neural
+  Networks},} \textit{MPRA Paper No. 95443},
+  \urlprefix\url{https://mpra.ub.uni-muenchen.de/95443/}.
+
+\bibitem[{Caporale et~al.(2004)Caporale, Ntantamis, Pantelidis, and
+  Pittis}]{Caporale2004}
+Caporale, G.~M., C.~Ntantamis, T.~Pantelidis, and N.~Pittis (2004),
+  \enquote{{The BDS Test as a Test for the Adequacy of a GARCH(1,1)
+  Specification. A Monte Carlo Study},} Economics Series 156, Institute for
+  Advanced Studies,
+  \urlprefix\url{https://ideas.repec.org/p/ihs/ihsesp/156.html}.
+
+\bibitem[{Clark et~al.(2020)Clark, Hyndman, Pagendam, and Ryan}]{Hyndman2020}
+Clark, S., R.~J. Hyndman, D.~Pagendam, and L.~M. Ryan (2020), \enquote{Modern
+  strategies for time series regression,} \textit{International Statistical
+  Review}.
+
+\bibitem[{Corradi, Swanson, and White(2000)}]{Corradi2000}
+Corradi, V., N.~R. Swanson, and H.~White (2000), \enquote{Testing for
+  stationarity-ergodicity and for comovements between nonlinear discrete time
+  Markov processes,} \textit{Journal of Econometrics}, 96(1), 39--73,
+  \doi{https://doi.org/10.1016/S0304-4076(99)00050-0},
+  \urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0304407699000500}.
+
+\bibitem[{Demetrescu and Kruse(2013)}]{Demetrescu2013}
+Demetrescu, M., and R.~Kruse (2013), \enquote{The power of unit root tests
+  against nonlinear local alternatives,} \textit{Journal of Time Series
+  Analysis}, 34(1), 40--61,
+  \doi{https://doi.org/10.1111/j.1467-9892.2012.00812.x},
+  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9892.2012.00812.x}.
+
+\bibitem[{Engle(1982)}]{Engle1982}
+Engle, R.~F. (1982), \enquote{Autoregressive conditional heteroscedasticity
+  with estimates of the variance of United Kingdom inflation,}
+  \textit{Econometrica: Journal of the Econometric Society}, 987--1007.
+
+\bibitem[{Šestanović and Arnerić(2021)}]{Sestanovic2021}
+Šestanović, T., and J.~Arnerić (2021), \enquote{Neural network structure
+  identification in inflation forecasting,} \textit{Journal of Forecasting},
+  40(1), 62--79, \doi{https://doi.org/10.1002/for.2698},
+  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1002/for.2698}.
+
+\bibitem[{Funahashi(1989)}]{Funahashi1989}
+Funahashi, K.-I. (1989), \enquote{On the approximate realization of continuous
+  mappings by neural networks,} \textit{Neural Networks}, 2(3), 183--192,
+  \doi{https://doi.org/10.1016/0893-6080(89)90003-8},
+  \urlprefix\url{https://www.sciencedirect.com/science/article/pii/0893608089900038}.
+
+\bibitem[{Goodfellow, Bengio, and Courville(2016)}]{Goodfellow2016}
+Goodfellow, I., Y.~Bengio, and A.~Courville (2016), \textit{Deep Learning}, MIT
+  Press, \url{http://www.deeplearningbook.org}.
+
+\bibitem[{Hastie, Tibshirani, and Friedman(2009)}]{Hastie2009}
+Hastie, T., R.~Tibshirani, and J.~Friedman (2009), \textit{The elements of
+  statistical learning: data mining, inference, and prediction}, Springer
+  Science \& Business Media.
+
+\bibitem[{Hill, O'Connor, and Remus(1996)}]{Hill1996}
+Hill, T., M.~O'Connor, and W.~Remus (1996), \enquote{Neural Network Models for
+  Time Series Forecasts,} \textit{Management Science}, 42, 1082--1092,
+  \doi{10.1287/mnsc.42.7.1082}.
+
+\bibitem[{Hyndman and Khandakar(2008)}]{Hyndman2008}
+Hyndman, R.~J., and Y.~Khandakar (2008), \enquote{Automatic Time Series
+  Forecasting: The forecast Package for R,} \textit{Journal of Statistical
+  Software, Articles}, 27(3), 1--22, \doi{10.18637/jss.v027.i03},
+  \urlprefix\url{https://www.jstatsoft.org/v027/i03}.
+
+\bibitem[{Kingma and Ba(2017)}]{Kingma2017}
+Kingma, D.~P., and J.~Ba (2017), \enquote{Adam: A Method for Stochastic
+  Optimization,} .
+
+\bibitem[{Lee, White, and Granger(1993)}]{Lee1993}
+Lee, T.-H., H.~White, and C.~W. Granger (1993), \enquote{Testing for neglected
+  nonlinearity in time series models: A comparison of neural network methods
+  and alternative tests,} \textit{Journal of Econometrics}, 56(3), 269--290,
+  \doi{https://doi.org/10.1016/0304-4076(93)90122-L},
+  \urlprefix\url{https://www.sciencedirect.com/science/article/pii/030440769390122L}.
+
+\bibitem[{Livieris, Pintelas, and Pintelas(2020)}]{Livieris2020}
+Livieris, I., E.~Pintelas, and P.~Pintelas (2020), \enquote{A CNN-LSTM model
+  for gold price time series forecasting,} \textit{Neural Computing and
+  Applications}, 32, \doi{10.1007/s00521-020-04867-x}.
+
+\bibitem[{Lütkepohl and Krätzig(2004)}]{Luetkepohl2004}
+Lütkepohl, H., and M.~Krätzig (2004), \textit{Applied Time Series
+  Econometrics}, Themes in Modern Econometrics, Cambridge University Press,
+  \doi{10.1017/CBO9780511606885}.
+
+\bibitem[{Makridakis, Spiliotis, and Assimakopoulos(2018)}]{Makridakis2018}
+Makridakis, S., E.~Spiliotis, and V.~Assimakopoulos (2018),
+  \enquote{Statistical and Machine Learning forecasting methods: Concerns and
+  ways forward,} \textit{PLOS ONE}, 13(3), 1--26,
+  \doi{10.1371/journal.pone.0194889},
+  \urlprefix\url{https://doi.org/10.1371/journal.pone.0194889}.
+
+\bibitem[{McCracken and Ng(2016)}]{McCracken2016}
+McCracken, M.~W., and S.~Ng (2016), \enquote{FRED-MD: A Monthly Database for
+  Macroeconomic Research,} \textit{Journal of Business \& Economic Statistics},
+  34(4), 574--589, \doi{10.1080/07350015.2015.1086655},
+  \urlprefix\url{https://doi.org/10.1080/07350015.2015.1086655}.
+
+\bibitem[{Rumelhart, Hinton, and Williams(1986)}]{Rumelhart1986}
+Rumelhart, D.~E., G.~E. Hinton, and R.~J. Williams (1986), \textit{Learning
+  Internal Representations by Error Propagation}, MIT Press, Cambridge, MA,
+  USA, p. 318–362.
+
+\bibitem[{Sánchez~García and Cruz~Rambaud(2020)}]{Garcia2020}
+Sánchez~García, J., and S.~Cruz~Rambaud (2020), \enquote{A GARCH approach to
+  model short-term interest rates: Evidence from Spanish economy,}
+  \textit{International Journal of Finance \& Economics},
+  \doi{https://doi.org/10.1002/ijfe.2234},
+  \urlprefix\url{https://onlinelibrary.wiley.com/doi/abs/10.1002/ijfe.2234}.
+
+\end{thebibliography}

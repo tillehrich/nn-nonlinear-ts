@@ -1,0 +1,61 @@
+
+\documentclass{article}
+
+\usepackage{amsmath,amsfonts}% Symbole definiert von der American Mathematical Society
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{bm}% Paket zur Erstellung von fettgedruckten Symbolen
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\usepackage{tikz}
+
+\bibliographystyle{jite}
+
+\textwidth 13cm
+
+\begin{document}
+
+\title{Nonlinear Time Series Prediction,\\ ARIMA vs. Neural Networks}
+
+\date{March 14, 2021}
+\author{Till Ehrich}
+
+\maketitle
+\vspace{7cm}
+\input{./latexChapters/Abstract.tex}
+
+% Inhaltsverzeichnis
+\tableofcontents
+
+% Tabellenverzeichnis
+\newpage
+\listoftables
+
+% Abbildungsverzeichnis
+\listoffigures
+
+% Symbol- und Abkürzungsverzeichnis
+\newpage
+\input{./latexChapters/Abbreviations.tex}
+
+
+\input{./latexChapters/Variables.tex}
+\newpage
+\input{./latexChapters/Introduction.tex}
+\input{./latexChapters/LinearTimeSeriesModeling.tex}
+\input{./latexChapters/NonlinearityInTimeSeries.tex}
+\input{./latexChapters/NeuralNetworks.tex}
+\input{./latexChapters/EmpiricalAnalysis.tex}
+
+\input{./latexChapters/ForecastComparison.tex}
+\input{./latexChapters/Conclusion.tex}
+\input{./latexChapters/Appendix.tex}
+
+
+% Literaturverzeichnis
+\newpage
+\bibliography{./latexChapters/bibliography}
+
+\end{document}

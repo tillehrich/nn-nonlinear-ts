@@ -1,0 +1,91 @@
+\section{Nonlinearity in Time Series}
+\label{chap:testing}
+
+The first question at hand is: What is nonlinearity? And the answer is as simple as it is unsatisfying - everything that is not linear.
+More precisely it means this means all the dynamics, that a linear model is unable to capture. These end up in the residual of a model, and here a
+violation of the \emph{i.i.d} assumption mentioned in chapter \ref{subsec:arima} can be attributed to nonlinearity. Nonlinear dependence can occur
+in moments of any order in the process, though here, the focus lies on dependencies in first and second order moments, namely nonlinearity in mean
+and conditional heteroscedasticity, with special emphasis on modeling the nonlinear mean process. As mentioned in \citet{Lee1993}, a process might still
+be linear in mean if it exhibits conditional heteroscedasticity. Therefore possible conditional heteroscedasticity needs to be tested and accounted for, before
+testing for violations of the \emph{i.i.d} assumption to detect nonlinearity in mean.
+
+\subsection{Conditional Heteroscedasticity}
+\label{subsec:heteroscedasticity}
+A proven way to detect conditional heteroscedasticity in a residual series is the ARCH-LM test developed by \cite{Engle1982}. Following
+\citet[chap. 2.6.2, p. 46]{Luetkepohl2004}, it is conducted by taking the squared residual series of a model (e.g. the ARIMA Model from chapter~\ref{subsec:arima})
+and regressing those on lagged values of itself. This leads to the following test regression:
+
+\begin{equation} \label{eq:archlm}
+	\hat{u}_t^2 = \beta_0 + \beta_1\hat{u}^2_{t-1}+...+ \beta_q\hat{u}^2_{t-q}+\epsilon_t
+\end{equation}
+
+where $\epsilon_t$ is an error term. Under the null hypothesis, all coefficients of lagged squared errors ranging from  $\beta_1$ to $\beta_q$ are zero, with the
+alternative hypothesis that one or more of these coefficients is different from zero. The resulting test statistic is the $R^2$ of regression \ref{eq:archlm},
+which has an asymptotic~$\chi^2(q)$~distribution under the null hypothesis. For choosing the appropriate lag length for the test equation, the autocorrelations of
+the squared residuals can be consulted. It is important to mention, that the ARCH-LM Test is also prone to falsely rejecting the null of no ARCH effects, if
+nonlinearity is present in the mean of the series \citep[p. 2]{Blake2003}. Here it is assumed that after properly accounting for present conditional heteroskedasticity,
+a rejection of the null on the remaining series can be traced back to present nonlinearity in the mean.
+
+\subsection{Modeling Conditional Heteroscedasticity}
+\label{subsec:garch}
+
+When it comes to modeling conditional heteroscedasticity, one of the standard models is the GARCH model based on the works by \citet{Engle1982}, and
+\citet{Bollerslev1986}, which is still one of the cornerstones of econometric analysis today \citep[p. 1]{Garcia2020}.
+The modeling is carried out on the residuals of a preceding mean model, such as the ARIMA model described in chapter \ref{subsec:arima}. The derivation of the univariate
+GARCH model follows \citet[chap. 5.2]{Luetkepohl2004}. A general GARCH$(q, p)$ process $u_t$ is defined as follows:
+
+\begin{equation} \label{eq:garch_u}
+	u_t = \xi_t\sigma_t, \xi_t \sim i.i.d.~N(0,1)
+\end{equation}
+
+\begin{equation} \label{eq:garch_sigsq}
+	\sigma_t^2 = \gamma_0 + \gamma_1 u_{t-1}^2+ ... + \gamma_q u_{t-q}^2 + \beta_1\sigma_{t-1}^2+...+\beta_p\sigma_{t-p}^2
+\end{equation}
+with $\gamma_0>0, \gamma_i, \beta_j\geq0, \forall i=1,...,q, j=1,...,p$, in order for all conditional variances $\sigma_t^2$ to be positive. Standardized residuals can be
+obtained by dividing the residuals by the root of the fitted variance,
+
+\begin{equation} \label{eq:u_std}
+	\tilde{u_t} = \frac{u_t}{\hat{\sigma_t}}
+\end{equation}
+which are free of heteroscedasticity according to equation~\ref{eq:garch_u}, if the conditional variances are fitted accurately.
+
+\subsection{Testing For Independence}
+\label{subsec:bds}
+To test for the violation of the \emph{i.i.d} assumption mentioned in chapter \ref{subsec:arima}, the BDS Test introduced by Brock et al.~\citep{Brock1996} can be used.
+There are many alternative tests to use in different scenarios. \citet{Bisaglia2014} delivered an extensive comparison of different tests for
+nonlinearity, with the BDS test achieving excellent results and being recommended as a starting point when testing for nonlinearity~\citep[p. 14]{Bisaglia2014}.
+Another important property of this test is that is has an unspecified DGP under the alternative hypothesis, which means that it does not indicate which kind of
+nonlinearity is present in the time series \cite[p. 7, 14]{Bisaglia2014}. In this application, this characteristic is negligible, as the model class presented in
+chapter \ref{chap:neural} is flexible in adapting to any kind of functional form.
+The derivation of the test follows \citet[p. 8, 9]{Bisaglia2014}.\\
+Given a time series $u_t,~t = 1,2,...,T$ the $m$-history of this time series at time $t$ is given as $U_t^m = (u_t, u_{t-1},...,u_{t-m+1})$, the $m$ lagged values
+of $u_t$ starting at $t$. This allows the construction of $T_m = T-m+1$ series of $m$-histories from the time series $u_t$. Now the point of interest is, whether the maximum
+deviation of a combination of these series, $sup||U_t^m - U_s^m||, \text{with}~sup||x|| = max_{1\leq k\leq m}{|x_k|}$ for $t<s$ does not exceed a threshold $\epsilon$. If this is the
+case, the indicator function $I_\epsilon(U_t^m,U_s^m)$ is 1, and 0 otherwise. By summing up the indicator function over all $T_m(T_m-1)/2$ combinations of $m$-histories, for which
+$t<s$, and dividing by the number of combinations one receives the share of combinations of $m$-histories, for which the maximum deviation lies beneath the threshold $\epsilon$.
+This is the Correlation Integral $C_{m,T}(\epsilon)$.
+
+\begin{equation} \label{eq:corr_int}
+	C_{m,T}(\epsilon) = \frac{2}{T_m(T_m-1)}\sum_{t<s}I_\epsilon(U_t^m,U_s^m)
+\end{equation}
+
+In other words, the correlation integral estimates the joint probability, that any two of the $m$-histories have a maximum deviation smaller than $\epsilon$,
+$P(|U_t-U_s|< \epsilon, |U_{t-1}-U_{s-1}|< \epsilon,...,|U_{t-m+1}-U_{s-m+1}|< \epsilon)$. If the $U_t$ are \emph{i.i.d}, this Probability should be equal to the following in the
+limiting case:
+
+\begin{equation} \label{eq:disj_prob}
+	C_{1,T}(\epsilon)^m = P(|U_t-U_s|<\epsilon)^m
+\end{equation}
+
+Which is the product of the disjoint probabilities of a combination of $m$-histories having a maximum deviation smaller than $\epsilon$. This leads to the
+following BDS test statistic:
+
+\begin{equation} \label{eq:bds}
+	V_{m\epsilon} = \sqrt{T}\frac{C_{m,T}(\epsilon) - C_{1,T}(\epsilon)^m}{s_{m,T}}
+\end{equation}
+
+with $s_{m,T}$ denoting the standard deviation, which can be estimated consistently, and the test statistic converging to $N(0,1)$ according to~\cite[p. 205]{Brock1996}.
+Referring back to the test setup at the beginning of this chapter, this test will be carried out using the residuals of a linear model, where conditional heteroscedasticity
+has been accounted for if present. If the null hypothesis of \emph{i.i.d} distribution is violated for these residuals, this indicates that the underlying time series is nonlinear.
+\citet[p. 283]{Caporale2004} suggest to carry out the test on the logarithm of the squared residuals when applied to residuals of a GARCH model, in order to make it nuisance-parameter free
+and improve performance. \citet[p. 289]{Caporale2004} also suggest values to use for $\frac{\epsilon}{\sigma}$, where $\sigma$ is the standard deviation of the GARCH residuals.

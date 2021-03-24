@@ -1,0 +1,9 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces Structure of a Single Layer MLP with $p=4$ and $M=4$}}{10}{}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Activation functions}}{11}{}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Midwest housing starts}}{12}{}%
+\contentsline {figure}{\numberline {4}{\ignorespaces ACF for midwest housing starts}}{13}{}%
+\contentsline {figure}{\numberline {5}{\ignorespaces PACF for midwest housing starts}}{13}{}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Residuals of ARMA model}}{14}{}%
+\contentsline {figure}{\numberline {7}{\ignorespaces ACF of squared residuals of ARMA model}}{14}{}%
+\contentsline {figure}{\numberline {8}{\ignorespaces MSE for all subsamples and horizon = 5}}{16}{}%
+\contentsline {figure}{\numberline {9}{\ignorespaces MSE for all subsamples and forecast horizons 1 and 10}}{22}{}%

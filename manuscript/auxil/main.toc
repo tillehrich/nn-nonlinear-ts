@@ -1,0 +1,17 @@
+\contentsline {paragraph}{\textbf Abstract.}{1}{}%
+\contentsline {section}{\numberline {1}Introduction}{5}{}%
+\contentsline {section}{\numberline {2}Linear Time Series Modeling}{5}{}%
+\contentsline {subsection}{\numberline {2.1}Stationarity}{5}{}%
+\contentsline {subsection}{\numberline {2.2}ARIMA Models}{6}{}%
+\contentsline {section}{\numberline {3}Nonlinearity in Time Series}{6}{}%
+\contentsline {subsection}{\numberline {3.1}Conditional Heteroscedasticity}{7}{}%
+\contentsline {subsection}{\numberline {3.2}Modeling Conditional Heteroscedasticity}{7}{}%
+\contentsline {subsection}{\numberline {3.3}Testing For Independence}{8}{}%
+\contentsline {section}{\numberline {4}Neural Networks}{9}{}%
+\contentsline {subsection}{\numberline {4.1}Structure}{9}{}%
+\contentsline {subsection}{\numberline {4.2}Activation Functions}{9}{}%
+\contentsline {subsection}{\numberline {4.3}Fitting Neural Networks}{10}{}%
+\contentsline {section}{\numberline {5}Empirical Analysis}{12}{}%
+\contentsline {section}{\numberline {6}Forecast Comparison}{15}{}%
+\contentsline {section}{\numberline {7}Conclusion}{17}{}%
+\contentsline {section}{\numberline {A}Tables and Figures}{18}{}%

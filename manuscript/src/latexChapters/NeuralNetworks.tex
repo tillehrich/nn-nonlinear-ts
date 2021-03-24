@@ -1,0 +1,120 @@
+\section{Neural Networks}
+\label{chap:neural}
+
+Neural Networks have long been subject of discussion in time series analysis and forecasting, as they overcome the limitations of traditional, linear models \citep[p. 1083]{Hill1996}.
+They're inherently nonlinear and are able to approximate any kind of functional form \citep{Funahashi1989}\footnote{cited in \citet[p. 1083]{Hill1996}}, which makes them ideal
+candidates for settings where assumptions necessary for linear time series models are violated. The derivation follows \citet[chap. 11.3]{Hastie2009}.
+There is a multitude of architectures available for NNs. Here, the focus lays on Multilayer Feedforward Neural Nets, also called MLPs, for regression cases.
+\subsection{Structure}
+\label{subsec:structure}
+
+The Structure displayed here is the one of a MLP with one hidden layer.
+Every one of the $M$ Neurons in the hidden layer is composed of a linear combination of the inputs $X_t$, which consist of $p$ lagged values of the target variable
+$y_t$, and the weights vector $\alpha_m$, consisting of $\alpha_{m 1}, ..., \alpha_{m p}$. A bias term $\alpha_{m 0}$ is added, and lastly the linear combination is wrapped in an
+\emph{activation function} $\sigma$:
+
+\begin{equation} \label{eq:nn_hidden}
+	Z_m = \sigma(\alpha_{m 0} + \alpha_m^TX_t)
+\end{equation}
+
+The target $y_t$ is then again modelled as a linear combination of the $M$ hidden neurons:
+
+\begin{equation} \label{eq:nn_out}
+	y_t = \sigma(\beta_0 + \beta^TZ),~\beta = \beta_1, ..., \beta_m
+\end{equation}
+
+\begin{figure}
+	\centering
+
+	\includegraphics[width=9cm]{latexGraphics/nnstructure.png}
+
+	\vspace{-1cm} % Unterschrift näher an die Abbildung
+	\caption{Structure of a Single Layer MLP with $p=4$ and $M=4$}
+	\label{fig:nnstructure}
+\end{figure}
+
+See figure~\ref{fig:nnstructure}\footnote{code for figure adapted from https://gist.github.com/anbrjohn/7116fa0b59248375cd0c0371d6107a59} for a visual representation of the NN.
+Note that while for classification tasks, the output layer is again transformed by an activation function, there is
+no transformation taking place in the output layer for regression applications. Additional hidden layers can be added, with every neuron of the next layer being linear combinations
+of all the neurons of the precvious layer, as described above.
+This allows for arbitrarily large numbers of layers and neurons. Typically the model specifications are optimized via grid search.
+
+\subsection{Activation Functions}
+\label{subsec:act}
+One possible option for the activation function is the identity function $f(x) = x$,
+which lead to the Neural Network simply being a linear combination of all the inputs, as in a linear model. Hence, the activation functions are, what adds the nonlinearity to
+the model and enable the function approximation capabilities of the NN. Other possible options for the activation function are:
+
+\begin{equation} \label{eq:sigmoid}
+	\text{The sigmoid function: } f(x) = \frac{1}{1+exp(-x)}
+\end{equation}
+
+\begin{equation} \label{eq:tanh}
+	\text{The tanh function: } f(x) = \frac{exp(x) - exp(-x)}{exp(x) + exp(-x)}
+\end{equation}
+
+\begin{equation} \label{eq:relu}
+	\text{The relu function: } f(x) = \begin{cases}
+      1 & \ \text{if}~ x>0 \\
+      0 & \ \text{if}~x<0 \\
+    \end{cases}
+\end{equation}
+
+\begin{figure}
+	\centering
+
+	\includegraphics[width=9cm]{latexGraphics/actfunctions.png}
+
+	\vspace{-1cm} % Unterschrift näher an die Abbildung
+	\caption{Activation functions}
+	\label{fig:actfunctions}
+\end{figure}
+
+Looking at the activation functions in figure \ref{fig:actfunctions}, one can see that for the sigmoid and tanh functions, the slope is steep
+around zero and quickly approaches 0 the higher the absolute input values are. Therefore it is recommended to rescale the data either to the unit scale or by standardization.
+
+\subsection{Fitting Neural Networks}
+\label{subsec:fitting}
+
+All the weights and biases of the NN, as mentioned in chapter~\ref{subsec:structure}, are usually fitted using backpropagation, a form of the gradient descent algorithm
+that has first been described for fitting NNs by \citet{Rumelhart1986}. Since then, a variety of different optimization strategies has evolved, an overview can be found in
+\citet[chap. 8]{Goodfellow2016}. Here, the simplest case of this algorithm will be layed out for the model specification in~chapter~\ref{subsec:structure}, following
+\citet[chap. 11.4]{Hastie2009}. The starting point is a cost function, which is usually the sum of squared errors for a regression model.
+
+\begin{equation} \label{eq:costf}
+	R(\theta) = \sum_{t=1}^{T}(y_t-f(X_t))^2
+\end{equation}
+
+Then the derivatives of the cost function w.r.t the parameters are computed.
+
+\begin{equation} \label{eq:dRdb}
+	\frac{\partial R(\theta)}{\partial \beta_m} = -2(y_t-f(X_t))\sigma(\alpha_{m0}+\alpha_m^TX_t)
+\end{equation}
+
+\begin{equation} \label{eq:dRda}
+	\frac{\partial R(\theta)}{\partial \alpha_{m i}} = -2(y_t-f(X_t))\beta_m\sigma'(\alpha_{m0}+\alpha_m^TX_t)y_{t-i}
+\end{equation}
+
+%Update beta
+\begin{equation} \label{eq:updbeta}
+	\beta_{m}^{+} = \beta_{m}-\gamma \frac{\partial R(\theta)}{\partial \beta_m}
+\end{equation}
+
+%Update alpha
+\begin{equation} \label{eq:updalpha}
+	\alpha_{m i}^{+} = \alpha_{m i}-\gamma \frac{\partial R(\theta)}{\partial \alpha_{m i}}
+\end{equation}
+
+
+The algorithm starts by initializing random weights, calculating the cost function, and updating each weight according to equations ~\ref{eq:updbeta}~and~\ref{eq:updalpha}.
+Next, the cost function is calculated again and the whole procedure starts over, which is done until convergence
+is achieved in the cost function. $\gamma$ is called the learning rate, which is crucial for the performance of the algorithm. If it is set too low, the algorithm might not reach a minimum or get stuck
+in a local minimum. When a learning rate is picked that is too high, the algorithm can miss the global minimum and not converge.\\
+
+In order to avoid overfitting, usually a regularization term $J(\theta)$, described in equation~\ref{eq:ridge} is multiplied by $\lambda \geq 0$ and added to the cost
+function. It penalizes high weights and shrinks them towards zero. $\lambda$ is a tuning parameter. The higher $\lambda$, the stronger the penalization. As the model structure, it is usually optimized
+via grid search.
+
+\begin{equation} \label{eq:ridge}
+	J(\theta) = \sum_{m=1}^{M}(\beta_i)^2+\sum_{m=1}^{M}\sum_{i=1}^{p}(\alpha_{m i})^2
+\end{equation}

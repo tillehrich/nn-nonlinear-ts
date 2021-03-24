@@ -1,0 +1,42 @@
+\section{Linear Time Series Modeling}
+\label{chap:linear}
+
+
+Linear models still lay the groundwork of modern time series analysis today. They are the first resort for any time series practitioner and the benchmark
+for all alternative modeling approaches.
+This chapter is based on \cite{Luetkepohl2004}, who give a detailed introduction into econometric time series analysis.
+Given the fact that an extensive overview is out of the scope of this thesis, only the most important concepts will be revised.
+
+\subsection{Stationarity}
+\label{subsec:stationarity}
+The basic assumption of stationarity involves two conditions of a time series process $\{y_t\}_{t \in T}$, constant mean of all members of a stationary process,
+and time invariance of the variance of the process:
+
+\begin{equation} \label{eq:stationarity_mean}
+	E(y_t) = \mu_y \forall~t \in T
+\end{equation}
+
+\begin{equation} \label{eq:stationarity_variance}
+	E[(y_t-\mu_y)(y_{t-h}-\mu_y)] = \gamma_h ~{\forall~t\in T}~\text{and all integers $h$, $(t-h) \in T$ }
+\end{equation}
+
+Failure to account for the absence of these properties results in biased model estimates, and model parameters can't be tested using traditional tests. Also the
+model will exhibit poor predictive performance. An adequate test for the presence of non-stationarity is the ADF Test, described in
+\citep[chap. 2.7.1]{Luetkepohl2004}. Here it is important to point out that the test equation of the ADF test is not ideally equipped to handle nonlinear DGPs,
+as the test equation has a linear structure. However, it has been shown that the ADF test still has reasonable power against nonlinear alternatives
+\citep[p. 40]{Demetrescu2013}, \citep[p. 54]{Corradi2000} and might be used even when nonlinearity is present. \citet{Demetrescu2013,Corradi2000} also propose and
+discuss alternative tests with nonlinear alternatives, which lay outside the scope of this thesis.
+
+\subsection{ARIMA Models}
+\label{subsec:arima}
+ARIMA models have been the workhorse of linear time series models for a long time. They will serve as the baseline for the comparison of forecasts between linear and
+nonlinear methods. The methodology briefly described here follows \citet[chap. 2.3.3]{Luetkepohl2004}.\\
+A general ARMA$(p,q)$ model can be written as follows:
+\begin{equation} \label{eq:arma}
+	y_t = \alpha_1 y_{t-1}+...+\alpha_p y_{t-p}+u_t+m_1 u_{t-1}+...+m_q u_{t-q}
+\end{equation}
+with $u_t \sim i.i.d~WN(0,\sigma^2)$. This assumption is also called the \emph{i.i.d} assumption, which will be subject of the diagnostic tests discussed in
+chapter~\ref{chap:testing}, as violations of this assumption lead to inconsistent model estimates and poor forecasting capabilities. This model is integrated by
+oder $d$, if differencing the data $d$ times is required in order to achieve stationarity, which yields the general ARIMA$(p,d,q)$ model. There is a multitude of procedures at hand
+to determine the optimal orders of the model, with one of the most popular being described in \citet[chap. 3]{Hyndman2008}. It is most feasible in this use case as it is
+tried and tested, and can be implemented automatically.

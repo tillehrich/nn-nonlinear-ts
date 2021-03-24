@@ -1,0 +1,59 @@
+\section{Forecast Comparison}
+\label{chap:benchmark}
+
+In this chapter, the forecasting capabilities of ARIMA models, described in chapter~\ref{subsec:arima}, and NNs described in chapter~\ref{chap:neural} will be compared based on the time series analyzed
+in chapter~\ref{chap:empirical}, for which nonlinearity can be assumed. The dataset is split into a training and a validation sample. Next, the optimal models are determined
+based on the training set and $h$-step out of sample forecasts are computed for each values of the validation sample, as described in equations~\ref{eq:hstep0}
+to \ref{eq:hstep3}. $y_t$ is the last value of the training set and real values for $y$ are used, as long as they are part of the training sample.
+The forecast accuracy is then compared according to the MSE of each model described in equation~\ref{eq:mse}.
+
+\begin{equation} \label{eq:hstep0}
+	y_t = f(y_{t-1},...,y_{t-p})
+\end{equation}
+
+\begin{equation} \label{eq:hstep1}
+    \hat{y}_{t+1} = f(y_t,...,y_{t-p+1})
+\end{equation}
+
+\begin{equation} \label{eq:hstep2}
+    \hat{y}_{t+2} = f(\hat{y}_{t+1},y_t,...,y_{t-p+2})~\text{...}
+\end{equation}
+
+\begin{equation} \label{eq:hstep3}
+    \hat{y}_{t+h} = f(\hat{y}_{t+h-1},\hat{y}_{t+h-2},...,\hat{y}_{t+h-p})
+\end{equation}
+
+\begin{equation} \label{eq:mse}
+    MSE = \frac{1}{H}\sum_{h=1}^{H}(y_{t+h}-\hat{y}_{t+h})^2
+\end{equation}
+
+The optimal specification of the ARIMA model is determined as in chapter~\ref{chap:empirical}. The optimal specification of the NN is determined via randomized grid
+search, allowing for nodesizes from 1 to 100 in increments of 5, maximum number of hidden layers ranging from 1 to 5 and possible values for alpha being generated
+on a log scale from 0.001 to 0.05. Furthermore, the relu activation function described in equation~\ref{eq:relu} was used for all hidden layers due to best performance
+among the three options described in chapter~\ref{subsec:act}. For fitting the model, the Adam algorithm \citep{Kingma2017} was used, which is a variant of the backpropagation
+algorithm described in ~\ref{subsec:fitting}. Out of the grid spanned by all parameter combinations, 2000 combinations are picked at random and trained based on
+of the first 90\% of the training sample, using the remaining 10\% as test set to evaluate the out of sample MSE. The best model is then picked, and retrained on the
+entire training set.\\
+In order to get a more consistent measure for the forecasting accuracy, this whole procedure is repeated for 50 subsets of the original series, each time eliminating
+one more observation from the series, starting with the most recent one. Forecasts are computed for horizons 1, 5, and 10 in order to compare short- to long term forecasting
+capabilitiy. In the end, models are compared according to the mean of their MSE over all subsamples per forecast horizon.
+
+\input{./latexTables/MSE}
+
+\begin{figure}
+	\centering
+
+
+	\includegraphics[width=11cm]{latexGraphics/benchmark_5_ahead.png}
+
+	\vspace{-0.5cm} % Unterschrift näher an die Abbildung
+	\caption{MSE for all subsamples and horizon = 5}
+	\label{fig:benchmark5}
+\end{figure}
+
+Table~\ref{tab:mse} shows that for horizons 1 and 10, the ARMA model exhibited better forecasting capability, while for horizon 5, the MLP showed better performance. In general,
+the accuracies are close to another, therefore no real dominance of one method over the other can be established. Figure~\ref{fig:benchmark5} also shows that predictive performance varies a lot
+depending on the subsample, with both models achiving better results than the other, but
+again no dominance can be inferred even for subsamples of the data. Figure~\ref{fig:benchmark} supports this claim. Furthermore, tables~\ref{tab:specifications1},~\ref{tab:specifications5} and
+\ref{tab:specifications10} in the Appendix show that the structure of the NN changes drastically over subsamples. Alltogether this indicates, that neither of the model types
+are able to capture the underlying DGP accurately.

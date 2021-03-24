@@ -1,0 +1,78 @@
+\section{Empirical Analysis}
+\label{chap:empirical}
+
+For the purpose of illustrating the theoretical concepts described in chapters \ref{chap:linear} and \ref{chap:testing},
+and to compare the forecasting accuracy of the models in chapter~\ref{chap:benchmark}, monthly data on midwest housing starts in the US from the FRED-MD Database is used~\citep{McCracken2016},
+ranging from January 1959 to October 2020.
+
+\begin{figure}[hbt!]
+	\centering
+
+	\includegraphics[width=11cm]{latexGraphics/houstmw.png}
+
+	\vspace{-1cm} % Unterschrift näher an die Abbildung
+	\caption{Midwest housing starts}
+	\label{fig:houstmw}
+\end{figure}
+
+The series has no clear up- or downward trending behaviour and seems to wander around non- linearly with a clear breaks in 2009 due to the global recession.
+Using the ADF Test with only a constant in the test regression, a p-value of~\adfresult~is obtained indicating stationarity on the 10\% confidence level.
+Next, an ARMA model to the data using the automated procedure mentioned in chapter~\ref{subsec:arima}, described in  \citet[chap. 3]{Hyndman2008},
+optimizing by AIC and disregarding integration, as stationarity has been shown. After visual investigation of the ACF (figure~\ref{fig:acf_houstmw}) and PACF (figure~\ref{fig:pacf_houstmw}) of the series, the maximum
+values of the ARMA parameters are set to the maximum number of significant lags in either the ACF or PACF, neglecting weakly significant correlations that
+occur after many lags of insignificant correlations.\\
+
+\begin{figure}[hbt!]
+	\centering
+
+	\includegraphics[width=11cm]{latexGraphics/acf_houstmw.png}
+
+	\vspace{-1cm} % Unterschrift näher an die Abbildung
+	\caption{ACF for midwest housing starts}
+	\label{fig:acf_houstmw}
+\end{figure}
+
+\begin{figure}[hbt!]
+	\centering
+
+	\includegraphics[width=11cm]{latexGraphics/pacf_houstmw.png}
+
+	\vspace{-1cm} % Unterschrift näher an die Abbildung
+	\caption{PACF for midwest housing starts}
+	\label{fig:pacf_houstmw}
+\end{figure}
+
+\begin{figure}[hbt!]
+	\centering
+
+	\includegraphics[width=11cm]{latexGraphics/u_hat_houstmw.png}
+
+	\vspace{-1cm} % Unterschrift näher an die Abbildung
+	\caption{Residuals of ARMA model}
+	\label{fig:u_hat_houstmw}
+\end{figure}
+
+\begin{figure}[hbt!]
+	\centering
+
+	\includegraphics[width=11cm]{latexGraphics/acf_u_hat_sq_houstmw.png}
+
+	\vspace{-1cm} % Unterschrift näher an die Abbildung
+	\caption{ACF of squared residuals of ARMA model}
+	\label{fig:acf_u_hat_sq_houstmw}
+\end{figure}
+
+\input{./latexTables/BDSResults}
+
+Carrying out the ARCH-LM Test using 3 lags according to figure~\ref{fig:acf_u_hat_sq_houstmw} of the squared Residuals of the selected ARMA(\parima,\qarima)
+\footnote{Details are given in tables~\ref{tab:arima1}, \ref{tab:arima2}, \ref{tab:arima3}}, the null hypothesis of no conditional heteroscedasticity for the
+residual series of the ARMA model can clearly be rejected (p-value of \archlmresult). \\If a fitted GARCH
+model captures the heteroscedasticity present in the residuals, the standardized residuals should exhibit no more heteroscedasticity (see equation~\ref{eq:garch_u}). Hence, the
+optimal GARCH model is selected according to the highest p-value of an ARCH-LM test on its standardized residuals, selecting of an array of models with maximum $p$ and
+$q$ of 20. This leads to a GARCH(\pgarch, \qgarch) model and a p-value of \archlmresultstd~for the ARCH-LM test on the standardized residuals. This indicates that the present
+heteroscedasticty has been cleared from the
+residual series. Table~\ref{tab:bds} shows the results of the BDS Test, using $\frac{\epsilon}{\sigma} = 0.5$ as described in \ref{subsec:bds}, for embedding
+dimensions 2 to 5. As the p-values for embedding dimensions 3 and 4 are below confidence levels of 5\% and 10\% respectively, the null hypothesis of independence
+can be rejected, and nonlinearity can be assumed for the series, as described in chapter~\ref{subsec:bds}. This means that the linear ARMA model is misspecified,
+which leads to inconsistent model estimates and poor forecasting capabilities, as described in chapter~\ref{subsec:arima}.
+
